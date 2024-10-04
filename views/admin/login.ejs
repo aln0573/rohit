@@ -1,0 +1,71 @@
+<%- include("../layouts/header.ejs") %>
+
+<div
+  class="text-center d-flex align-items-center vh-100"
+  id="login"
+  style="max-width: 600px; margin: auto"
+>
+  <div class="container w-50 py-5" id="main-login">
+    <h2 class="font-weight-bold" style="color: black">Admin Login</h2>
+    <% if(typeof message !== 'undefined') { %>
+    <div class="alert alert-danger text-center" role="alert">
+      <%= message %>
+    </div>
+    <% } %>
+    <form action="/admin" method="post" class="pt-3" id="form">
+      <div class="mb-3">
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="Enter Email"
+          id="email"
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="Enter Password"
+          id="password"
+        />
+      </div>
+      <button type="submit" class="btn btn-success rounded-pill">Login</button>
+      <div id="error" class="text-warning fw-bold"></div>
+    </form>
+  </div>
+</div>
+
+<%- include("../layouts/footer.ejs") %>
+
+<script>
+  let form = document.getElementById("form");
+  let error = document.getElementById("error");
+  let message = [];
+
+  form.addEventListener("submit", (e) => {
+    message = [];
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    email_validate(email);
+
+    if (password.length < 6) {
+      message.push("Password should be at least 6 characters");
+    }
+
+    if (message.length > 0) {
+      e.preventDefault();
+      error.innerText = message[0];
+    }
+  });
+
+  function email_validate(email) {
+    let reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    let result = reg.test(email);
+    if (!result) {
+      message.push("Invalid Email");
+    }
+  }
+</script>

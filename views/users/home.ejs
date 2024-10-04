@@ -1,0 +1,45 @@
+<%- include("../layouts/header.ejs") %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <br />
+      <h2 class="text-center text-light">Welcome <%= user.name %></h2>
+
+      <div class="container text-center">
+        <img
+          src="userImages/<%= user.image %>"
+          alt="<%= user.image %>"
+          class="rounded-circle mt-3 mb-3"
+          width="150px"
+          height="150px"
+        />
+
+        <div class="mb-4">
+          <table class="table table-bordered table-light">
+            <tr>
+              <td class="fw-bold">Name</td>
+              <td><%= user.name %></td>
+            </tr>
+            <tr>
+              <td class="fw-bold">Email</td>
+              <td><%= user.email %></td>
+            </tr>
+            <tr>
+              <td class="fw-bold">Mobile</td>
+              <td><%= user.mobile %></td>
+            </tr>
+          </table>
+        </div>
+        <div class="text-center">
+          <a href="/edit?id=<%= user._id%>" class="btn btn-primary mr-2"
+            >Edit</a
+          >
+          <a href="/logout" class="btn btn-danger">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("../layouts/footer.ejs") %>

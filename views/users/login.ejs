@@ -1,0 +1,74 @@
+<%- include("../layouts/header.ejs") %>
+
+<div class="text-center d-flex align-items-center vh-100" id="login">
+  <div class="container w-25 py-5" id="main-login">
+    <div class="title">
+      <h2 class="font-weight-bold" style="color: black">Login</h2>
+
+      <%if(locals.message){ %>
+      <div class="alert alert-danger text-center" id="invalid">
+        <%=message%>
+      </div>
+      <% } %>
+    </div>
+    <form action="/login" method="post" class="pt-3" id="form">
+      <div class="form-group">
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Enter Email"
+          name="email"
+          id="email"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="Enter Password"
+          id="password"
+        />
+      </div>
+      <button type="submit" class="btn btn-success rounded-pill">Submit</button>
+    </form>
+    <br />
+    <div class="fw-bold">Create an account</div>
+    <a href="/register" class="btn btn-primary btn-sm">Sign Up</a>
+    <br /><br />
+    <div id="error" class="text-warning fw-bold"></div>
+  </div>
+</div>
+
+<%- include("../layouts/footer.ejs") %>
+
+<script>
+  let form = document.getElementById("form");
+  let error = document.getElementById("error");
+  let message = [];
+
+  form.addEventListener("submit", (e) => {
+    message = [];
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    email_validate(email);
+
+    if (password.length < 5) {
+      message.push("Password should be at least 6 characters");
+    }
+
+    if (message.length > 0) {
+      e.preventDefault();
+      error.innerText = message[0];
+    }
+  });
+
+  function email_validate(email) {
+    let reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    let result = reg.test(email);
+    if (!result) {
+      message.push("Invalid Email");
+    }
+  }
+</script>

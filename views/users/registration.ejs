@@ -1,0 +1,109 @@
+<%- include('../layouts/header.ejs') %>
+
+<div class="text-center d-flex align-items-center vh-100" id="login">
+  <div class="container w-50 py-2" id="main-login">
+    <br />
+    <h2 class="font-weight-bold" style="color: black">User Registration</h2>
+    <form
+      action=""
+      method="post"
+      enctype="multipart/form-data"
+      class="pt-3"
+      id="form"
+    >
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          placeholder="Enter Name"
+          id="name"
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="Enter Email"
+          id="email"
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          name="mobile"
+          placeholder="Enter Mobile Number"
+          id="mobile"
+        />
+      </div>
+      <div class="mb-3">
+        <input type="file" class="form-control" name="image" />
+      </div>
+      <div class="mb-2">
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="Enter Password"
+          id="password"
+        />
+      </div>
+      <div id="error" class="text-warning fw-bold"></div>
+      <% if(locals.message) { %>
+      <div class="alert alert-success text-center" role="alert">
+        <span><%= message %></span>
+      </div>
+      <% } %>
+      <button type="submit" class="btn btn-success rounded-pill">
+        Register
+      </button>
+    </form>
+  </div>
+</div>
+
+<%- include('../layouts/footer.ejs') %>
+
+<script>
+  let form = document.getElementById("form");
+  let error = document.getElementById("error");
+  let message = [];
+  let name_reg = /^[a-zA-Z ]+$/;
+  let mobile_reg = /^\d{10}$/;
+
+  form.addEventListener("submit", (e) => {
+    message = [];
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let mobile = document.getElementById("mobile").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    if (!name_reg.test(name)) {
+      message.push("Invalid Name");
+    }
+
+    email_validate(email);
+
+    if (!mobile_reg.test(mobile)) {
+      message.push("Mobile Number should be 10 digit numbers");
+    }
+
+    if (password.length < 6) {
+      message.push("Password should be at least 6 characters");
+    }
+
+    if (message.length > 0) {
+      e.preventDefault();
+      error.innerText = message[0];
+    }
+  });
+
+  function email_validate(email) {
+    let reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    let result = reg.test(email);
+    if (!result) {
+      message.push("Invalid Email");
+    }
+  }
+</script>

@@ -1,0 +1,71 @@
+<%- include("../layouts/header.ejs") %>
+
+<div class="container mt-4">
+  <h1 class="text-center text-light mb-4">Dashboard</h1>
+
+  <div class="row mb-3 justify-content-between">
+    <div class="col-md-6">
+      <form class="d-flex">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          name="search"
+        />
+        <button class="btn btn-warning" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="col-md-6 text-md-end">
+      <a href="/admin/new-user" class="btn btn-primary">Add New User</a>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Image</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if(users.length > 0) { users.forEach(user => { %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.mobile %></td>
+        <td>
+          <img
+            src="/userImages/<%= user.image %>"
+            alt="<%= user.image %>"
+            width="100px"
+            height="100px"
+          />
+        </td>
+        <td>
+          <a
+            href="/admin/edit-user?id=<%= user._id %>"
+            class="btn btn-primary btn-sm"
+            >Edit</a
+          >
+          <a
+            href="/admin/delete-user?id=<%= user._id %>"
+            class="btn btn-danger btn-sm"
+            >Delete</a
+          >
+        </td>
+      </tr>
+      <% }); } else { %>
+      <tr>
+        <td colspan="5" class="text-center">No users found</td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <a href="/admin/home" class="btn btn-secondary">Go to Home</a>
+</div>
+
+<%- include("../layouts/footer.ejs") %>

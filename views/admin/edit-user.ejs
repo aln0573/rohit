@@ -1,0 +1,59 @@
+<%- include("../layouts/header.ejs") %>
+
+<div class="container">
+  <br />
+  <h2 class="text-center text-light">Edit User</h2>
+
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-6">
+      <img
+        src="/userImages/<%=user.image%>"
+        alt="<%=user.image%>"
+        class="img-thumbnail mb-3"
+        width="100px"
+        height="100px"
+      />
+      <form method="post" id="editUserForm">
+        <div class="mb-3">
+          <label for="name" class="form-label text-light">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            value="<%=user.name%>"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label text-light">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            value="<%=user.email%>"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="mobile" class="form-label text-light">Mobile</label>
+          <input
+            type="text"
+            class="form-control"
+            id="mobile"
+            name="mobile"
+            value="<%=user.mobile%>"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update User</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include("../layouts/footer.ejs") %>

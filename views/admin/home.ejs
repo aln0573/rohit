@@ -1,0 +1,40 @@
+<%- include("../layouts/header.ejs") %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <br />
+      <h1 class="text-center mb-4 text-light">Welcome <%= admin.name %></h1>
+      <div class="text-center">
+        <img
+          src="/userImages/<%= admin.image %>"
+          alt="<%= admin.image %>"
+          class="img-fluid rounded-circle mb-3"
+          style="width: 150px; height: 150px"
+        />
+      </div>
+      <div class="mb-4">
+        <table class="table table-bordered table-light table-rounded">
+          <tr class="table-dark">
+            <td class="fw-bold">Name</td>
+            <td><%= admin.name %></td>
+          </tr>
+          <tr class="table-dark">
+            <td class="fw-bold">Email</td>
+            <td><%= admin.email %></td>
+          </tr>
+          <tr class="table-dark">
+            <td class="fw-bold">Mobile</td>
+            <td><%= admin.mobile %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="text-center">
+        <a href="/admin/dashboard" class="btn btn-primary mr-2">Dashboard</a>
+        <a href="/admin/logout" class="btn btn-danger">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("../layouts/footer.ejs") %>
